@@ -1,26 +1,17 @@
 import React, {useEffect} from 'react';
-import {
-  Alert,
-  StyleSheet,
-  View,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
-import styled from 'styled-components/native';
-import {Text, FAB} from 'react-native-paper';
+import {Alert} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {addcity} from '../redux/reducer';
+import styled from 'styled-components/native';
 import CityCard from '../components/CityCard';
+import AddCityButton from '../components/AddCityButton';
 
 function CitiesScreen({navigation}) {
   let cities = useSelector(state => state);
   const dispatch = useDispatch();
-  const addCity = city => dispatch(addcity(city));
   const API_KEY = '799acd13e10b7a3b7cf9c0a8da6e5394';
   const citiesReducer = city => dispatch({type: 'ADD_CITY', payload: city});
 
   useEffect(async () => {
-    console.log('cities', cities);
     if (cities.length === 0) {
       await getWeatherOfCities();
     }
@@ -41,13 +32,17 @@ function CitiesScreen({navigation}) {
       if (result.status === 200) {
         const data = await result.json();
         if (data) {
-          console.log('res', data);
           citiesReducer(data);
         }
+      } else {
+        Alert.alert('Error', 'Something went wrong while adding city', [
+          {text: 'OK'},
+        ]);
       }
-      console.log('cities', cities);
     } catch (ex) {
-      console.log('There has been a problem with your fetch operation: ' + ex);
+      Alert.alert('Error', 'Something went wrong while adding city', [
+        {text: 'OK'},
+      ]);
     }
   };
 
@@ -60,28 +55,22 @@ function CitiesScreen({navigation}) {
   return (
     <>
       <Container>
-        <FAB
-          style={styles.fab}
-          small
-          icon="plus"
-          label="Add a new city"
-          onPress={() =>
-            navigation.navigate('AddCityScreen', {
-              addCity,
-            })
-          }
-        />
+        <WelcomeText>Good morning! Mario</WelcomeText>
+        <AddCityButton />
         <CityScrollView>
           {cities.length === 0 ? (
-            <Container>
-              <Text>Weather</Text>
-            </Container>
+            <Container></Container>
           ) : (
-            cities.map(data => {
-              return (
-                <TouchableOpacity onPress={() => navigateToWeatherDetail(data)}>
+            cities.map((data, index) => {
+              return index == cities.length - 1 ? (
+                <LastCardContainer
+                  onPress={() => navigateToWeatherDetail(data)}>
                   <CityCard data={data} key={data.name} />
-                </TouchableOpacity>
+                </LastCardContainer>
+              ) : (
+                <CardContainer onPress={() => navigateToWeatherDetail(data)}>
+                  <CityCard data={data} key={data.name} />
+                </CardContainer>
               );
             })
           )}
@@ -90,14 +79,6 @@ function CitiesScreen({navigation}) {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  fab: {
-    position: 'relative',
-    margin: 20,
-    right: 0,
-  },
-});
 
 export const Container = styled.View`
   flex: 1;
@@ -113,20 +94,21 @@ export const CityScrollView = styled.ScrollView`
     justify-content: center;
   }
 `;
-
-// export const ButtonLabel = styled.Text`
-// color: #ffffff;
-// font-size: 14px;
-//font-family: Poppins;
-// width: 110vw;
-// height: 60px;
-// `;
-// const ButtonContainer = styled.TouchableHighlight`
-// background-color:black;
-// width: 80%;
-// margin-top: 5px;
-// border-color:black;
-// border-width: 2px;
-// `;
+export const CardContainer = styled.TouchableOpacity``;
+export const LastCardContainer = styled.TouchableOpacity`
+  margin-bottom: 200px;
+`;
+export const WelcomeText = styled.Text`
+  height: 78px;
+  width: 215px;
+  color: #01175f;
+  font-family: Poppins;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 42px;
+  text-align: center;
+  margin-top: 50px;
+`;
 
 export default CitiesScreen;

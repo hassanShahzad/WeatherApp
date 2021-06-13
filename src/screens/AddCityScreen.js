@@ -3,7 +3,6 @@ import {View, StyleSheet, Alert} from 'react-native';
 import {IconButton, TextInput, FAB} from 'react-native-paper';
 import Header from '../components/Header';
 import {useDispatch} from 'react-redux';
-import {addcity} from '../redux/reducer';
 
 function AddCityScreen({navigation}) {
   const [cityName, setCityName] = useState('');
@@ -27,7 +26,6 @@ function AddCityScreen({navigation}) {
         const data = await result.json();
         cityData = data;
         citiesReducer(data);
-        console.log('new city', data);
       } else {
         Alert.alert('Error', 'Something went wrong while adding city', [
           {text: 'OK'},

@@ -16,18 +16,33 @@ const CityCard = ({data}) => {
   ];
 
   useEffect(() => {
-    console.log('data', data);
     setData();
   });
 
   const setData = () => {
     const dateAndTimeInSeconds = data.sys.sunrise;
     const presentDate = new Date(dateAndTimeInSeconds * 1000);
-    const onlyDate = presentDate.toLocaleDateString();
-    setCurrentDate(onlyDate);
+    const days = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ];
+    const dateString = presentDate.toLocaleDateString();
+    const dayNumber = new Date(dateString);
+    const dayName = days[dayNumber.getDay()];
+    const onlyDay = presentDate.toLocaleDateString('en-GB', {
+      day: '2-digit',
+    });
+    const onlyMonth = presentDate.toLocaleDateString('en-GB', {
+      month: 'long',
+    });
+    const fullDate = `${dayName} ${onlyDay}, ${onlyMonth}`;
+    setCurrentDate(fullDate);
     setIcon(`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
-    console.log('icon', icon);
-
     const onlyTime = presentDate.toLocaleTimeString();
     setCurrentTime(onlyTime);
     const color = colors[Math.floor(Math.random() * colors.length)];
@@ -65,7 +80,7 @@ export const PlaceDateContainer = styled.View`
   justify-content: center;
   margin: 0 auto;
   color: #000000;
-  margin-left: 10px;
+  margin-left: 20px;
 `;
 
 export const TemperatureText = styled.Text`
@@ -82,9 +97,14 @@ export const CityText = styled.Text`
   font-weight: bold;
 `;
 export const DateText = styled.Text`
-  color: white;
-  font-size: 18px;
+  height: 36px;
+  width: 84px;
+  color: #ffffff;
   font-family: Poppins;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 18px;
 `;
 export const TimeText = styled.Text`
   color: white;

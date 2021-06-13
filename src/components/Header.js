@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import styled from 'styled-components/native';
 
