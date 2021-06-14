@@ -1,11 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
-  StyleSheet,
-  Text,
   View,
-  Image,
   ActivityIndicator,
-  SafeAreaView,
   ScrollView,
   FlatList,
   Alert,
@@ -16,10 +12,9 @@ import Header from '../components/Header';
 import DayCard from '../components/DayCard';
 import HourItem from '../components/HourItem';
 
-const openWeatherKey = '799acd13e10b7a3b7cf9c0a8da6e5394';
-
 const WeatherDetailScreen = ({navigation, route}) => {
-  let url = `https://api.openweathermap.org/data/2.5/onecall?&units=metric&exclude=minutely&appid=${openWeatherKey}`;
+  const appKey = '799acd13e10b7a3b7cf9c0a8da6e5394';
+  let url = `https://api.openweathermap.org/data/2.5/onecall?&units=metric&exclude=minutely&appid=${appKey}`;
 
   const cityData = route.params.data;
   const [forecast, setForecast] = useState(null);
