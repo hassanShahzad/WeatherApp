@@ -3,19 +3,14 @@ import styled from 'styled-components/native';
 
 const AddCityButton = () => {
   return (
-    <Container
-      onPress={() =>
-        navigation.navigate('AddCityScreen', {
-          addCity,
-        })
-      }>
+    <Container>
       <AddCityIcon source={require('../../assets/icons/Plus.png')} />
       <AddCityText>Aggiungi città</AddCityText>
     </Container>
   );
 };
 
-export const Container = styled.TouchableOpacity`
+export const Container = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: center;

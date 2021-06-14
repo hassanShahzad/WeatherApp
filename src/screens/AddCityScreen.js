@@ -1,16 +1,14 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
 import {IconButton, TextInput, FAB} from 'react-native-paper';
-import Header from '../components/Header';
 import {useDispatch} from 'react-redux';
+import Header from '../components/Header';
 
 function AddCityScreen({navigation}) {
   const [cityName, setCityName] = useState('');
   const API_KEY = '799acd13e10b7a3b7cf9c0a8da6e5394';
   const dispatch = useDispatch();
   const citiesReducer = city => dispatch({type: 'ADD_CITY', payload: city});
-
-  let cityData;
 
   const onSaveCity = () => {
     getWeatherOfCity(cityName);
@@ -24,7 +22,6 @@ function AddCityScreen({navigation}) {
 
       if (result.status === 200) {
         const data = await result.json();
-        cityData = data;
         citiesReducer(data);
       } else {
         Alert.alert('Error', 'Something went wrong while adding city', [

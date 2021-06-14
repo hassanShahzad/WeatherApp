@@ -56,7 +56,10 @@ function CitiesScreen({navigation}) {
     <>
       <Container>
         <WelcomeText>Good morning! Mario</WelcomeText>
-        <AddCityButton />
+        <CardContainer onPress={() => navigation.navigate('AddCityScreen')}>
+          <AddCityButton />
+        </CardContainer>
+
         <CityScrollView>
           {cities.length === 0 ? (
             <Container></Container>
@@ -65,7 +68,7 @@ function CitiesScreen({navigation}) {
               return index == cities.length - 1 ? (
                 <LastCardContainer
                   onPress={() => navigateToWeatherDetail(data)}>
-                  <CityCard data={data} key={data.name} />
+                  <CityCard data={data} key={index} />
                 </LastCardContainer>
               ) : (
                 <CardContainer onPress={() => navigateToWeatherDetail(data)}>
