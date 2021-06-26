@@ -4,23 +4,19 @@ import {
   ActivityIndicator,
   ScrollView,
   FlatList,
-  Alert,
   RefreshControl,
 } from 'react-native';
 import styled from 'styled-components/native';
 import Header from '../components/Header';
 import DayCard from '../components/DayCard';
 import HourItem from '../components/HourItem';
+import {getForecast} from '../shared/NetworkService';
 
 const WeatherDetailScreen = ({navigation, route}) => {
-  const appKey = '799acd13e10b7a3b7cf9c0a8da6e5394';
-  let url = `https://api.openweathermap.org/data/2.5/onecall?&units=metric&exclude=minutely&appid=${appKey}`;
-
   const cityData = route.params.data;
   const [forecast, setForecast] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
   const [currentDate, setCurrentDate] = useState();
-
   const showDate = data => {
     const dateAndTimeInSeconds = data.sys.sunrise;
     const presentDate = new Date(dateAndTimeInSeconds * 1000);
@@ -46,25 +42,16 @@ const WeatherDetailScreen = ({navigation, route}) => {
     setCurrentDate(fullDate);
   };
 
-  const loadForecast = async () => {
-    setRefreshing(true);
-    const response = await fetch(
-      `${url}&lat=${cityData.coord.lat}&lon=${cityData.coord.lon}`,
-    );
-    const data = await response.json();
-    if (!response.ok) {
-      Alert.alert(`Error retrieving weather data: ${data.message}`);
-    } else {
-      setForecast(data);
-    }
-
-    setRefreshing(false);
-  };
-
   useEffect(() => {
     showDate(cityData);
     if (!forecast) {
-      loadForecast();
+      const latitude = cityData.coord.lat;
+      const longitude = cityData.coord.lon;
+      setRefreshing(true);
+      getForecast(latitude, longitude).then(data => {
+        setForecast(data);
+        setRefreshing(false);
+      });
     }
   });
 

@@ -1,38 +1,19 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Alert} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {IconButton, TextInput, FAB} from 'react-native-paper';
 import {useDispatch} from 'react-redux';
 import Header from '../components/Header';
+import {getWeatherOfCity} from '../shared/NetworkService';
 
 function AddCityScreen({navigation}) {
   const [cityName, setCityName] = useState('');
-  const API_KEY = '799acd13e10b7a3b7cf9c0a8da6e5394';
   const dispatch = useDispatch();
   const citiesReducer = city => dispatch({type: 'ADD_CITY', payload: city});
-
   const onSaveCity = () => {
-    getWeatherOfCity(cityName);
-    navigation.goBack();
-  };
-  const getWeatherOfCity = async city => {
-    try {
-      const result = await fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`,
-      );
-
-      if (result.status === 200) {
-        const data = await result.json();
-        citiesReducer(data);
-      } else {
-        Alert.alert('Error', 'Something went wrong while adding city', [
-          {text: 'OK'},
-        ]);
-      }
-    } catch (ex) {
-      Alert.alert('Error', 'Something went wrong while adding city', [
-        {text: 'OK'},
-      ]);
-    }
+    getWeatherOfCity(cityName).then(data => {
+      citiesReducer(data);
+      navigation.goBack();
+    });
   };
   return (
     <>

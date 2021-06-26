@@ -1,14 +1,13 @@
 import React, {useEffect} from 'react';
-import {Alert} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components/native';
 import CityCard from '../components/CityCard';
 import AddCityButton from '../components/AddCityButton';
+import {getWeatherOfCity} from '../shared/NetworkService';
 
 function CitiesScreen({navigation}) {
   let cities = useSelector(state => state);
   const dispatch = useDispatch();
-  const API_KEY = '799acd13e10b7a3b7cf9c0a8da6e5394';
   const citiesReducer = city => dispatch({type: 'ADD_CITY', payload: city});
 
   useEffect(async () => {
@@ -23,33 +22,12 @@ function CitiesScreen({navigation}) {
     });
   };
 
-  const getWeatherOfCity = async city => {
-    try {
-      const result = await fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`,
-      );
-
-      if (result.status === 200) {
-        const data = await result.json();
-        if (data) {
-          citiesReducer(data);
-        }
-      } else {
-        Alert.alert('Error', 'Something went wrong while adding city', [
-          {text: 'OK'},
-        ]);
-      }
-    } catch (ex) {
-      Alert.alert('Error', 'Something went wrong while adding city', [
-        {text: 'OK'},
-      ]);
-    }
-  };
-
   const getWeatherOfCities = () => {
     const myCities = ['Milan', 'Florence', 'Rome'];
     myCities.map(city => {
-      getWeatherOfCity(city);
+      getWeatherOfCity(city).then(data => {
+        citiesReducer(data);
+      });
     });
   };
   return (
