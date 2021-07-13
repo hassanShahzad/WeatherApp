@@ -48,7 +48,6 @@ export const HourTimeNow = styled.Text`
   height: 30px;
   width: 41px;
   color: #ffffff;
-  font-family: Poppins;
   font-size: 18px;
   font-weight: bold;
   letter-spacing: 0;
@@ -59,7 +58,6 @@ export const HourTime = styled.Text`
   height: 17px;
   width: 70px;
   color: #ffffff;
-  font-family: Poppins;
   font-size: 12px;
   font-weight: 300;
   letter-spacing: 0;
@@ -73,7 +71,6 @@ export const HourTemperatureNow = styled.Text`
   height: 35px;
   width: 40px;
   color: #ffffff;
-  font-family: Poppins;
   font-size: 25px;
   font-weight: bold;
   letter-spacing: 0;
@@ -85,7 +82,6 @@ export const HourTemperature = styled.Text`
   height: 28px;
   width: 32px;
   color: #ffffff;
-  font-family: Poppins;
   font-size: 20px;
   font-weight: 300;
   letter-spacing: 0;

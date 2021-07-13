@@ -138,11 +138,9 @@ export const LoadingText = styled.Text`
   text-align: center;
   font-size: 42px;
   color: white;
-  font-family: Poppins;
 `;
 export const TemperatureText = styled.Text`
   color: white;
-  font-family: Poppins;
   font-size: 110px;
   font-weight: bold;
   margin-right: 50px;
@@ -150,7 +148,6 @@ export const TemperatureText = styled.Text`
 export const WeatherTypeText = styled.Text`
   color: white;
   font-size: 26px;
-  font-family: Poppins;
   font-weight: bold;
   margin: 0 auto;
 `;
@@ -164,7 +161,6 @@ export const DateText = styled.Text`
   height: 28px;
   width: 285px;
   color: #ffffff;
-  font-family: Poppins;
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 0;

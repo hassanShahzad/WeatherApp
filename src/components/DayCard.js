@@ -40,7 +40,6 @@ export const DayNameText = styled.Text`
   height: 31px;
   width: 86px;
   color: #ffffff;
-  font-family: Poppins;
   font-size: 22px;
   font-weight: bold;
   letter-spacing: 0;
@@ -51,7 +50,6 @@ export const DayTemperatureText = styled.Text`
   height: 51px;
   width: 51px;
   color: #ffffff;
-  font-family: Poppins;
   font-size: 36px;
   font-weight: bold;
   letter-spacing: 0;
@@ -64,7 +62,6 @@ export const Container = styled.View`
   align-items: center;
   justify-content: space-between;
   margin: 40px 10px 180px 20px;
-
   height: 232px;
   width: 148px;
   border-radius: 20px;

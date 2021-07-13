@@ -86,21 +86,18 @@ export const PlaceDateContainer = styled.View`
 export const TemperatureText = styled.Text`
   color: white;
   font-size: 50px;
-  font-family: Poppins;
   font-weight: bold;
   margin-right: 10px;
 `;
 export const CityText = styled.Text`
   color: white;
   font-size: 26px;
-  font-family: Poppins;
   font-weight: bold;
 `;
 export const DateText = styled.Text`
   height: 36px;
   width: 84px;
   color: #ffffff;
-  font-family: Poppins;
   font-size: 15px;
   font-weight: 500;
   letter-spacing: 0;
@@ -109,7 +106,6 @@ export const DateText = styled.Text`
 export const TimeText = styled.Text`
   color: white;
   font-size: 12px;
-  font-family: Poppins;
 `;
 const TemperatureIcon = styled.Image`
   width: 84px;

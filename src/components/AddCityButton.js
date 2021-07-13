@@ -19,7 +19,7 @@ export const AddCityText = styled.Text`
   height: 28px;
   width: 144px;
   color: #01175f;
-  font-family: Poppins;
+
   font-size: 20px;
   font-weight: 600;
   letter-spacing: 0;

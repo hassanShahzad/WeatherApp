@@ -83,7 +83,6 @@ export const WelcomeText = styled.Text`
   height: 78px;
   width: 215px;
   color: #01175f;
-  font-family: Poppins;
   font-size: 28px;
   font-weight: 600;
   letter-spacing: 0;
